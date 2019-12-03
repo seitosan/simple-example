@@ -1,0 +1,5 @@
+application:
+  name: simple-example
+  project: simple-test
+  private-port: 8080
+  public-port: 80
