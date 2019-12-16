@@ -1,5 +1,5 @@
 # Build your application with this image called "build"
-FROM adoptopenjdk/openjdk8:alpine AS build
+FROM openjdk:8-alpine AS build
 
 # Add the required packages
 RUN apk update && apk upgrade && apk add bash
@@ -19,9 +19,17 @@ WORKDIR /app
 RUN gradle build -x test
 
 # The container that will run
-FROM adoptopenjdk/openjdk8:alpine-slim
+FROM openjdk:8-alpine AS run
 
+# Choose the port to publicly expose to the internet
 EXPOSE 8080
+
+# Add required packages
+RUN apk update && apk upgrade && apk add shadow
+
+# Create a dedicated user to run your app with (for security reasons)
+RUN useradd -ms /bin/bash qovery
+USER qovery
 
 # Get the build artifact (can be a folder)
 COPY --from=build /app/build/libs/simple-example-1.0.jar /app.jar
