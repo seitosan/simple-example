@@ -1,5 +1,11 @@
 application:
   name: simple-example
   project: simple-test
-  private-port: 8080
-  public-port: 80
+  cloud_region: aws/eu-west-3
+  publicly_accessible: true
+routers:
+  - name: main
+    routes:
+      - application_name: jhipster-sample-app
+        paths:
+          - /*
