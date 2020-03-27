@@ -3,10 +3,6 @@ application:
   project: testing-seitosan
   cloud_region: aws/eu-west-3
   publicly_accessible: true
-databases:
-- type: mysql
-  version: "5.7"
-  name: my-mysql-3498225
 routers:
 - name: main
   routes:
